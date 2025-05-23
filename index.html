@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator za paulovnije</title>
+    <style>
+
+
+    /* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 19px;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px black, -1px -1px 2px black;
+  background-image: url('paulownia_leaves.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #666;
+  padding: 20px;
+  margin: 0 auto 20px;
+  width: 100%;
+  font-size: 45px;
+}
+
+/* Layout */
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+.left-section, .right-section {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+/* Form Layout */
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.form-group, .form-group-one {
+  flex: 1 1 45%;
+  min-width: 150px;
+  margin: 10px 0;
+}
+
+.form-group label, .form-group-one label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group input[type="text"],
+.form-group-one input,
+#controls input[type="text"],
+.button,
+#calculate {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  width: 100%;
+}
+
+input[type="radio"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Buttons */
+.button,
+#calculate {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  max-width: 300px;
+  margin: 5px auto;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+#toggle-exclusion {
+  background-color: red;
+}
+
+#toggle-exclusion.land-mode {
+  background-color: blue;
+}
+
+/* Result Display */
+#result {
+  background-color: yellow;
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 25px;
+  padding: 10px;
+  width: 100%;
+}
+
+#suggestedValues {
+  background-color: lightblue;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #000;
+  margin-top: 0;
+}
+
+#specialcomment {
+  text-align: justify;
+  min-height: 100px; /* optional, sets minimum height */
+  margin: 20px 0;
+  border: 2px solid #000;
+  padding: 10px;
+  /* remove fixed height */
+  /* remove overflow: hidden */
+  /* let it expand naturally */
+}
+
+/* Section Dividers */
+#AboutApp,
+#blog {
+  width: 100%;
+  margin: 10px 0;
+  border-top: 8px solid #bbb;
+  border-radius: 5px;
+}
+
+.separator {
+  border-top: 2px solid #000;
+  margin: 20px 0;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.separator::before {
+  content: "—";
+  font-size: 1.5em;
+}
+
+/* Details & Map */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+}
+
+details > summary::before {
+  content: '🔍';
+  position: absolute;
+  left: -10px;
+  top: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+details[open] > summary::before {
+  content: '🔓';
+}
+
+#map {
+  height: 50vh;
+  width: 100%;
+}
+
+/* Controls */
+#controls {
+  text-align: center;
+  margin-top: 10px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+/* Info Boxes */
+#area,
+.land-data,
+.land-box {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.land-box {
+  width: 90%;
+  text-align: center;
+}
+
+.land-title,
+.land-header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.land-details {
+  margin-left: 10px;
+}
+
+.side-list {
+  text-align: left;
+  margin-top: 10px;
+}
+
+/* Title */
+.app-title {
+  background: linear-gradient(to right, #4CAF50, #FFEB3B);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  border: 3px solid #000;
+  border-radius: 8px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.center-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers child items horizontally */
+    justify-content: center; /* optional: for vertical centering */
+    
+    padding: 0 2rem;
+  }
+
+  .center-form input,
+  .center-form button {
+    width: 250px;
+    padding: 8px;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .center-form label {
+    font-weight: bold;
+  }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-section,
+  .right-section,
+  .form-group-one {
+    flex: 1 1 100%;
+  }
+
+  input[type="number"],
+  .button,
+  #controls input[type="text"],
+  #calculate {
+    width: 100%;
+  }
+
+  .land-box {
+    width: 100%;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <h1>Calculator for Optimal <br> Tree Planting</h1>
+
+    <div id="AboutApp">
+        <h2 style="text-align: center;">About the App</h2>
+        <div style="display: flex; justify-content: center; padding: 10px;">
+            <p style="max-width: 1000px; text-align: justify;">
+                Welcome to the <b>Tree Planting Spacing Calculator!</b> This tool helps you determine the appropriate spacing for planting various types of trees, as well as the optimal number of seedlings on your land, based on the dimensions of your plot and the selected planting pattern. Whether you want to maximize space usage or follow specific planting guidelines, our app provides useful insights and recommendations to support healthy growth and efficient land use. Stay tuned for updates and additional features!
+            </p>
+        </div>
+    </div>
+
+    <div class="main-content" style="padding: 10px; outline: 2px solid #000; margin-bottom: 20px;">
+        <div class="left-section">
+            <div class="form-group">
+                <label for="treeType">Choose the type of tree</label>
+                <select id="treeType" onchange="updateSuggestedValues()">
+                    <option>Select a tree type</option>
+                </select>
+            </div>
+
+            <div id="suggestedValues" class="form-group"></div>
+
+            <div class="form-group">
+                <label>Choose planting style (system):
+                    
+                </label>
+                <div class="radio-group">
+                    <label><input type="radio" name="plantingStyle" value="Square" checked> Square</label>
+                    <label><input type="radio" name="plantingStyle" value="Rectangular"> Rectangular</label>
+                    <label><input type="radio" name="plantingStyle" value="Hexagonal"> Hexagonal/Triangular</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="unit">Choose measurement unit</label>
+                <select id="unit" onchange="updateLandSize()">
+                    <option value="metara">Meter</option>
+                </select>
+            </div>
+
+            <div class="form-container">
+                <div class="form-group-one">
+                    <label for="distanceX">Desired distance <br>between seedlings (X)</label>
+                    <input type="number" id="distanceX">
+                </div>
+                <div class="form-group-one">
+                    <label for="distanceY">Desired distance <br>between rows (Y)</label>
+                    <input type="number" id="distanceY">
+                </div>
+                <div class="form-group-one">
+                    <label for="landWidth">Plot width</label>
+                    <input type="number" id="landWidth" oninput="updateLandSize()">
+                </div>
+                <div class="form-group-one">
+                    <label for="landHeight">Plot length</label>
+                    <input type="number" id="landHeight" oninput="updateLandSize()">
+                </div>
+            </div>
+
+            <div class="center-form">
+                <label for="areaSquareMeters">Area in square meters:</label>
+                <input type="text" id="areaSquareMeters" readonly>
+
+                <div id="landSize" class="form-group"></div>
+                <button id="calculate" onclick="calculateTrees()">Calculate</button>
+            </div>
+
+            <div id="result"></div>
+
+            <!-- <div id="specialcomment"></div> -->
+
+
+        </div>
+
+        <div class="right-section">
+            <div class="app-title">Land Area Calculator</div>
+            <div id="map"></div>
+            <div id="controls">
+                <input id="search-box" type="text" placeholder="Enter a place you want to find on the map">
+                <button id="clear-shape" class="button">Clear all marked areas</button>
+                <button id="undo" class="button">Undo step</button>
+                <button id="toggle-exclusion" class="button">Switch to exclusion mode</button>
+
+                <div id="area">Area: </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC84bwUKyNCKTHUu8JI-lHO5zpFE3ORYEM&libraries=drawing,geometry,places"></script>
+<!-- Main JavaScript -->
+<script src="map.js"></script>
+<script src="calculator.js"></script>
+    
+</body>
+</html>
