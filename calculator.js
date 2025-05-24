@@ -80,16 +80,16 @@ function updateLandSize() {
     const areaSquareMetersField = document.getElementById('areaSquareMeters');
 
     if (!isNaN(landWidth) && !isNaN(landHeight)) {
-        let landSizeText = `Veličina zemljišta: ${landWidth} x ${landHeight} ${unit}`;
+        let landSizeText = `Land Size: ${landWidth} x ${landHeight} ${unit}`;
         let area = landWidth * landHeight;
 
-        if (unit === 'metara') {
+        if (unit === 'meters') {
             // Update the separate field for square meters
             areaSquareMetersField.value = `${area.toFixed(2)} m²`;
             
             landSizeText += ` = ${area.toFixed(2)} m²`;
             if (area >= 10000) {
-                landSizeText += ` = ${(area / 10000).toFixed(2)} hektara`;
+                landSizeText += ` = ${(area / 10000).toFixed(2)} hectars`;
             }
         } else {
             // If the unit is not in meters, still show the area in square meters
