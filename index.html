@@ -297,26 +297,31 @@ details[open] > summary::before {
     font-weight: bold;
   }
 
-        /* Footer */
-    footer {
-        
-      background-color: #222;
-      color: #ccc;
-      text-align: center;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-    }
+       footer {
+  background-color: #222;
+  color: #ccc;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-    footer a {
-      color: #ccc;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
+.footer-container {
+  max-width: 1300px;
+  width: 100%;
+  text-align: center;
+}
 
-    footer a:hover {
-      color: white;
-    }
+footer a {
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
 
+footer a:hover {
+  color: white;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
